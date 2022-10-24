@@ -16,4 +16,4 @@ I checked to see if any of the submissions did not generate exactly ten response
 
 The consolidated table (hopefully tidy enough) contains a single observation for each instance of a movie appearing on someone's list. There are 1205 respondents, so this table contains 12054 records (thanks to the adjustments described above).
 
-See http://github.com/ianrmcdonald/bfi_poll/BFI.html for more details.
+Ian McDonald: ianrmcdonald\@gmail.com
