@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>bfi_for_tidy_tuesday</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="BFI_files/libs/clipboard/clipboard.min.js"></script>
+<script src="BFI_files/libs/quarto-html/quarto.js"></script>
+<script src="BFI_files/libs/quarto-html/popper.min.js"></script>
+<script src="BFI_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="BFI_files/libs/quarto-html/anchor.min.js"></script>
+<link href="BFI_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="BFI_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="BFI_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="BFI_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="BFI_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">bfi_for_tidy_tuesday</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Every ten years since 1952 the film journal <a href="https://www.bfi.org.uk/sight-and-sound"><em>Sight and Sound</em></a> publishes a list of <a href="https://www.bfi.org.uk/sight-and-sound/greatest-films-all-time">The 100 Greatest Films of All Time</a>. The journal and its parent organization the British Film Institute (BFI) survey hundreds of film critics and experts around the world, and while the BFI publishes dozens of ranked lists, the decennial Greatest Films survey is the best known. The results of the 2022 survey will appear in <em>Sight and Sound’s</em> December issue.</p>
+<p>For the most recent survey from 2012, the BFI surveyed 1205 respondents, including 846 critics and 359 directors. Each respondent lists their ten top all-time movies, unranked. To determine the overall rankings, the BFI simply tallies the number of times each movie appears in the list of 846 critics, and ranks the movies based on the frequency. <em>Vertigo</em> (1958) appeared in 191 of 846 surveys, more than any other picture, and was thus identified as the Greatest of All Time. For the first time ever, <em>Citizen Kane</em> (1941) was displaced from the top spot. The BFI generates a parallel list of directors’ choices (won in 2012 by perennial favorite <em>Tokyo Story</em>), but the critics’ list generates the most attention.</p>
+<p>Like any list of this kind, there is nothing is scientific about its design, but the discussion is more rewarding than the list itself. The poll inspired <a href="https://www.bfi.org.uk/sight-and-sound/polls/greatest-films-all-time/vertigo-hitchcock-new-number-one" title="Vertigo rises: is Hitchcock’s dark masterpiece the greatest film of all time?">think pieces about <em>Vertigo</em></a>. and numerous <a href="https://www.bbc.com/news/entertainment-arts-19078948" title="Vertigo is named 'greatest film of all time">news accounts.</a> In his submission, Roger Ebert, long time participant wrote, “Lists are ridiculous, but if you’re going to vote, you have to play the game.” (<a href="https://www2.bfi.org.uk/films-tv-people/sightandsoundpoll2012/voter/142" title="Roger Ebert list">See his list here</a>.)</p>
+<p>The large number of respondents may be the best feature about this survey. It’s hard to say how the methodology skews the results. It might encourage some strategic group think that exaggerates support for the top choices. At the same time, the list of chosen films has over 2000 entries, but more than 1200 were selected just once. <em>Vertigo</em> did not appear on 77% of the ballots.</p>
+<p>Even so, the top ten list has been somewhat predictable in recent years, and movies like <em>Tokyo Story</em>, <em>The Passion of Joan of Arc</em>, and <em>Rules of the Game</em> appear consistently somewhere near the top. Since this is an “all time” list, I would expect stability over the years, with some gradual shifts in the critics consensus such as the slow climb of movies like <em>Vertigo</em> and <em>The Searchers</em>.</p>
+<p>For 2012, BFI published the names and lists of each respondent, some of whom are household names in the movie business. Using the rvest package I screen scraped the respondent lists and their choices. I hope I can reuse this routine for the 2022 when it appears shortly.</p>
+<p>I checked to see if any of the submissions did not generate exactly ten responses. Three of the 1205 responders had more than ten responses, all of them famous directors: <a href="https://www2.bfi.org.uk/films-tv-people/sightandsoundpoll2012/voter/1058">Martin Scorsese</a> and <a href="https://www2.bfi.org.uk/films-tv-people/sightandsoundpoll2012/voter/1134">Quentin Tarantino</a> (yes, Scorsese and Tarantino) show lists of 12, and <a href="https://www2.bfi.org.uk/films-tv-people/sightandsoundpoll2012/voter/928">David O. Russell</a> shows a list of 11. One Israeli critic shows a list of 9. Otherwise, everyone’s list contains exactly ten films.</p>
+<p>The consolidated table (hopefully tidy enough) contains a single observation for each instance of a movie appearing on someone’s list. There are 1205 respondents, so this table contains 12054 records (thanks to the adjustments described above).</p>
+<p>The variables are:</p>
+<ul>
+<li><p><strong>selection</strong>: movie appearing on a list.</p></li>
+<li><p><strong>year</strong>: release year of the selection.</p></li>
+<li><p><strong>director</strong>: director of the selection.</p></li>
+<li><p><strong>url</strong>: BFI website url of the respondent’s selections. Each url corresponds to a single respondent name.</p></li>
+<li><p><strong>row_id</strong>: an index of the row in the original dataset (which I inserted for who knows what)</p></li>
+<li><p><strong>voter</strong>: name of the respondent</p></li>
+<li><p><strong>role</strong>: role of the respondent: critic, director, programmer, academic, and a few others. The poll treats any non-director as a “critic”</p></li>
+<li><p><strong>country</strong>: nationality of the respondent. Sometimes more than one nationality appears, delimited by “/”</p></li>
+<li><p><strong>gender</strong>: in this case, male or female</p></li>
+</ul>
+<p>With the four exceptions noted above, each respondent appears ten times in the table with ten different selections.</p>
+</section>
+<section id="why-use-this-data" class="level2">
+<h2 class="anchored" data-anchor-id="why-use-this-data">Why use this data?</h2>
+<p>Network analysis, or anything suggesting which groups of respondents (by country, by gender, or anything else) cluster around similar kinds of preferences.</p>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<p>Load the two libraries</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Perform the scrape that generates a list of respondents and their corresponding url’s. There are 1205 separate url’s. No data checking is happening here, but it did generate the voters table loaded by the voters.rda file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www2.bfi.org.uk/films-tv-people/sightandsoundpoll2012/voters"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>voters <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"table"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_table</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>()</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>voter_urls <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>     <span class="fu">html_nodes</span>(<span class="st">"a"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>     <span class="fu">html_attr</span>(<span class="st">"href"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>     <span class="fu">as_tibble</span>(.) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>     <span class="fu">filter</span>(<span class="fu">str_detect</span>(value,<span class="st">"voter/"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>     <span class="fu">select</span>(<span class="at">voter_url =</span> value)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>voters <span class="ot">&lt;-</span> voters <span class="sc">%&gt;%</span> </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>     <span class="fu">rename</span>(<span class="at">voter =</span> X1, <span class="at">role =</span> X2, <span class="at">country =</span> X3, <span class="at">gender =</span> X4) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">role =</span> <span class="fu">str_to_lower</span>(role))</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>voters <span class="ot">&lt;-</span> <span class="fu">cbind</span>(voters, voter_urls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This routine scrapes each of the lists from the url’s found above. DON’T RUN THIS unless you want to tie up your system for about 20 minutes. We don’t want to constantly scrape the BFI website but this routine worked fine. The results are found in movies.rda.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>compile_movies <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       table <span class="ot">&lt;-</span> <span class="fu">read_html</span>(x) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">html_nodes</span>(<span class="st">"table"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">html_table</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>          <span class="fu">bind_rows</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">url =</span> x)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>themovies <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(voters<span class="sc">$</span>voter_url, compile_movies)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>themovies <span class="ot">&lt;-</span> themovies <span class="sc">%&gt;%</span> </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">selection =</span> X1, <span class="at">year =</span> X2, <span class="at">director =</span> X3)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>themovies <span class="ot">&lt;-</span> themovies <span class="sc">%&gt;%</span> </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">row_id =</span> <span class="fu">row_number</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This code should generate the single, consolidated table.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="at">file =</span> <span class="st">"movies.rda"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="at">file =</span> <span class="st">"voters.rda"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>themovies <span class="ot">&lt;-</span> themovies <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">row_id =</span> <span class="fu">row_number</span>())</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>poll_all <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(themovies, voters, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"url"</span> <span class="ot">=</span> <span class="st">"voter_url"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

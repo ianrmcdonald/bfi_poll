@@ -1,0 +1,126 @@
+---
+title: "Tidy Tuesday proposal:  British Film Institute Poll Data"
+format: 
+  html: default
+execute:
+  eval: false
+  echo: true
+---
+
+## Overview
+
+Every ten years since 1952 the film journal [*Sight and Sound*](https://www.bfi.org.uk/sight-and-sound) publishes a list of [The 100 Greatest Films of All Time](https://www.bfi.org.uk/sight-and-sound/greatest-films-all-time). The journal and its parent organization the British Film Institute (BFI) survey hundreds of film critics and experts around the world, and while the BFI publishes dozens of ranked lists, the decennial Greatest Films survey is the best known. The results of the 2022 survey will appear in *Sight and Sound's* December issue.
+
+For the most recent survey from 2012, the BFI surveyed 1205 respondents, including 846 critics and 359 directors. Each respondent lists their ten top all-time movies, unranked. To determine the overall rankings, the BFI simply tallies the number of times each movie appears in the list of 846 critics, and ranks the movies based on the frequency. *Vertigo* (1958) appeared in 191 of 846 surveys, more than any other picture, and was thus identified as the Greatest of All Time. For the first time ever, *Citizen Kane* (1941) was displaced from the top spot. The BFI generates a parallel list of directors' choices (won in 2012 by perennial favorite *Tokyo Story*), but the critics' list generates the most attention.
+
+Like any list of this kind, there is nothing is scientific about its design, but the discussion is more rewarding than the list itself. The poll inspired [think pieces about *Vertigo*](https://www.bfi.org.uk/sight-and-sound/polls/greatest-films-all-time/vertigo-hitchcock-new-number-one "Vertigo rises: is Hitchcock’s dark masterpiece the greatest film of all time?"). and numerous [news accounts.](https://www.bbc.com/news/entertainment-arts-19078948 "Vertigo is named 'greatest film of all time") In his submission, Roger Ebert, long time participant wrote, "Lists are ridiculous, but if you're going to vote, you have to play the game." ([See his list here](https://www2.bfi.org.uk/films-tv-people/sightandsoundpoll2012/voter/142 "Roger Ebert list").)
+
+The large number of respondents may be the best feature about this survey. It's hard to say how the methodology skews the results. It might encourage some strategic group think that exaggerates support for the top choices. At the same time, the list of chosen films has over 2000 entries, but more than 1200 were selected just once. *Vertigo* did not appear on 77% of the ballots.
+
+Even so, the top ten list has been somewhat predictable in recent years, and movies like *Tokyo Story*, *The Passion of Joan of Arc*, and *Rules of the Game* appear consistently somewhere near the top. Since this is an "all time" list, I would expect stability over the years, with some gradual shifts in the critics consensus such as the slow climb of movies like *Vertigo* and *The Searchers*.
+
+For 2012, BFI published the names and lists of each respondent, some of whom are household names in the movie business. Using the rvest package I screen scraped the respondent lists and their choices. I hope I can reuse this routine for the 2022 when it appears shortly.
+
+I checked to see if any of the submissions did not generate exactly ten responses. Three of the 1205 responders had more than ten responses, all of them famous directors: [Martin Scorsese](https://www2.bfi.org.uk/films-tv-people/sightandsoundpoll2012/voter/1058) and [Quentin Tarantino](https://www2.bfi.org.uk/films-tv-people/sightandsoundpoll2012/voter/1134) (yes, Scorsese and Tarantino) show lists of 12, and [David O. Russell](https://www2.bfi.org.uk/films-tv-people/sightandsoundpoll2012/voter/928) shows a list of 11. One Israeli critic shows a list of 9. Otherwise, everyone's list contains exactly ten films.
+
+The consolidated table (hopefully tidy enough) contains a single observation for each instance of a movie appearing on someone's list. There are 1205 respondents, so this table contains 12054 records (thanks to the adjustments described above).
+
+The variables are:
+
+-   **selection**: movie appearing on a list.
+
+-   **year**: release year of the selection.
+
+-   **director**: director of the selection.
+
+-   **url**: BFI website url of the respondent's selections. Each url corresponds to a single respondent name.
+
+-   **row_id**: an index of the row in the original dataset (which I inserted for who knows what)
+
+-   **voter**: name of the respondent
+
+-   **role**: role of the respondent: critic, director, programmer, academic, and a few others. The poll treats any non-director as a "critic"
+
+-   **country**: nationality of the respondent. Sometimes more than one nationality appears, delimited by "/"
+
+-   **gender**: in this case, male or female
+
+With the four exceptions noted above, each respondent appears ten times in the table with ten different selections.
+
+## Why use this data?
+
+Network analysis, or anything suggesting which groups of respondents (by country, by gender, or anything else) cluster around similar kinds of preferences.
+
+##  Code
+
+Load the two libraries
+
+```{r library}
+
+library(rvest)
+library(tidyverse)
+```
+
+Perform the scrape that generates a list of respondents and their corresponding url's. There are 1205 separate url's. No data checking is happening here, but it did generate the voters table loaded by the voters.rda file.
+
+```{r scrape_respondents}
+
+url <- "https://www2.bfi.org.uk/films-tv-people/sightandsoundpoll2012/voters"
+
+voters <- read_html(url) %>% 
+  html_nodes("table") %>% 
+  html_table() %>% 
+  bind_rows()
+
+voter_urls <- read_html(url) %>% 
+     html_nodes("a") %>% 
+     html_attr("href") %>% 
+     as_tibble(.) %>% 
+     filter(str_detect(value,"voter/")) %>% 
+     select(voter_url = value)
+
+voters <- voters %>% 
+     rename(voter = X1, role = X2, country = X3, gender = X4) %>% 
+     mutate(role = str_to_lower(role))
+
+voters <- cbind(voters, voter_urls)
+```
+
+This routine scrapes each of the lists from the url's found above. DON'T RUN THIS unless you want to tie up your system for about 20 minutes. We don't want to constantly scrape the BFI website but this routine worked fine. The results are found in movies.rda.
+
+```{r scrape_each_list}
+
+compile_movies <- function(x) {
+
+       table <- read_html(x) %>% 
+          html_nodes("table") %>% 
+          html_table() %>% 
+          bind_rows() %>% 
+          mutate(url = x)
+
+}
+
+themovies <- map_dfr(voters$voter_url, compile_movies)
+themovies <- themovies %>% 
+  rename(selection = X1, year = X2, director = X3)
+
+themovies <- themovies %>% 
+     mutate(row_id = row_number())
+```
+
+This code should generate the single, consolidated table.
+
+```{r compile_single_table}
+
+load(file = "movies.rda")
+load(file = "voters.rda")
+
+themovies <- themovies %>% 
+     mutate(row_id = row_number())
+
+poll_all <- inner_join(themovies, voters, by = c("url" = "voter_url"))
+
+
+
+
+```
