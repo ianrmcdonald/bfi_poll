@@ -51,7 +51,7 @@ With the four exceptions noted above, each respondent appears ten times in the t
 
 Network analysis, or anything suggesting which groups of respondents (by country, by gender, or anything else) cluster around similar kinds of preferences.
 
-##  Code
+## Code
 
 Load the two libraries
 

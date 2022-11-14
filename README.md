@@ -1,5 +1,7 @@
 ## Overview
 
+The project can be downloaded from https://github.com/ianrmcdonald/bfi_poll
+
 Every ten years since 1952 the film journal [\*Sight and Sound\*](%5Bhttps://www.bfi.org.uk/sight-and-sound)\](https://www.bfi.org.uk/sight-and-sound)) publishes a list of [The 100 Greatest Films of All Time](%5Bhttps://www.bfi.org.uk/sight-and-sound/greatest-films-all-time).\](https://www.bfi.org.uk/sight-and-sound/greatest-films-all-time).) The journal and its parent organization the British Film Institute (BFI) survey hundreds of film critics and experts around the world, and while the BFI publishes dozens of ranked lists, the decennial Greatest Films survey is the best known. The results of the 2022 survey will appear in \*Sight and Sound's\* December issue.
 
 For the most recent survey from 2012, the BFI surveyed 1205 respondents, including 846 critics and 359 directors. Each respondent lists their ten top all-time movies, unranked. To determine the overall rankings, the BFI simply tallies the number of times each movie appears in the list of 846 critics, and ranks the movies based on the frequency. \*Vertigo\* (1958) appeared in 191 of 846 surveys, more than any other picture, and was thus identified as the Greatest of All Time. For the first time ever, \*Citizen Kane\* (1941) was displaced from the top spot. The BFI generates a parallel list of directors' choices (won in 2012 by perennial favorite \*Tokyo Story\*), but the critics' list generates the most attention.
